@@ -22,6 +22,59 @@ class ThreadDemo1{
 }
 
 
+class Table14 extends Thread{
+    public void run(){
+	for(int i=1;i<=10;i++)
+	    System.out.println("14 *"+i+"="+(14*i));
+		try{
+			Thread.sleep(500);
+		}catch(InterruptedException e){System.out.println("Exception...");}
+    }
+}
+class Table19 extends Thread{
+    public void run(){
+	for(int i=1;i<=10;i++){
+	    System.out.println("19 *"+i+"="+(19*i));
+		try{
+			Thread.sleep(500);
+		}catch(InterruptedException e){System.out.println("Exception...");}
+	}
+    }
+}
+class ThreadDemo1{
+	public static void main(String[] args){
+		Table14 t14=new Table14();
+		Table19 t19=new Table19();
+		t19.start();
+		t14.start();
+		try{
+			t14.join();
+			t19.join();
+		}catch(InterruptedException e){System.out.println("Exception...");}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
