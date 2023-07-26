@@ -1,0 +1,87 @@
+package IOStreams;
+
+import java.io.*;
+import java.util.*;
+
+class Employee {
+	String num, name, job, sal, dept;
+
+	public Employee(String no, String n, String j, String s, String d) {
+		num = no;
+		name = n;
+		job = j;
+		sal = s;
+		dept = d;
+	}
+
+	public String getNum() {
+		return num;
+	}
+
+	public void setNum(String num) {
+		this.num = num;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getJob() {
+		return job;
+	}
+
+	public void setJob(String job) {
+		this.job = job;
+	}
+
+	public String getSal() {
+		return sal;
+	}
+
+	public void setSal(String sal) {
+		this.sal = sal;
+	}
+
+	public String getDept() {
+		return dept;
+	}
+
+	public void setDept(String dept) {
+		this.dept = dept;
+	}
+	public void display() {
+		System.out.println("Emp No : "+this.getNum());
+		System.out.println("Emp Name : "+this.getName());
+		System.out.println("Job : "+this.getJob());
+		System.out.println("Salary : "+this.getSal());
+		System.out.println("Dept No : "+this.getDept());
+	}
+}
+
+class Empdetails {
+	public static void main(String[] args) throws Exception {
+		FileReader f = new FileReader("C:\\Users\\reshma.n\\eclipse-workspace\\Java\\src\\IOStreams\\emp.txt");
+		BufferedReader b = new BufferedReader(f);
+		ArrayList<Employee> arr = new ArrayList<>();
+		String s;
+		double totsal=0,minsal;
+		while ((s = b.readLine()) != null) {
+			String[] str = s.split(":");
+			Employee e = new Employee(str[0], str[1], str[2], str[3], str[4]);
+			totsal+=Integer.valueOf(str[3]);
+			arr.add(e);
+		}
+		minsal=Double.parseDouble(arr.get(0).getSal());
+		for(int i=0;i<arr.size();i++) {
+			arr.get(i).display();
+			totsal+=Double.parseDouble(arr.get(i).getSal());
+			if(Double.parseDouble(arr.get(i).getSal())<minsal)
+				minsal=Double.parseDouble(arr.get(i).getSal()); 
+		}
+		System.out.println(totsal+" "+minsal);
+	}
+}
